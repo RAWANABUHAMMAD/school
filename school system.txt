@@ -147,3 +147,87 @@ FROM Student
 INNER JOIN Attendance ON Student.student_id = Attendance.student_id;
 
 
+
+Q19.
+SELECT course.CourseName
+FROM course
+JOIN attendance ON course.Course_ID = attendance.course_ID
+GROUP BY course.CourseName
+HAVING COUNT(DISTINCT attendance.student_ID) > 1;
+
+
+
+
+
+Q20.
+SELECT teacher.Name, COUNT(course.Course_ID) AS course_count
+FROM teacher
+JOIN course ON teacher.Teacher_ID = course.Teacher_ID
+GROUP BY teacher.Name
+ORDER BY course_count DESC
+LIMIT 1
+
+
+
+
+
+Q21.
+SELECT student.Name 
+FROM student
+JOIN classroom ON student.Classroom_ID = classroom.Classroom_ID
+WHERE classroom.Capacity = (SELECT MAX(capacity) FROM classroom);
+
+
+
+Q22.
+SELECT course.CourseName 
+FROM course
+JOIN teacher ON teacher.Teacher_ID = course.Teacher_ID
+WHERE teacher.Name =  'John Smith';
+
+
+
+
+Q23.
+SELECT DISTINCT student.Name
+FROM student
+JOIN attendance ON student.Student_ID = attendance.student_ID
+JOIN course ON attendance.course_ID = course.Course_ID
+WHERE course.CourseName = 'Algebra I';
+
+
+
+
+
+Q24.
+SELECT Specialization, COUNT() AS teacher_count    1
+FROM teacher
+GROUP BY Specialization;
+
+
+
+
+
+
+Q25.
+SELECT course.CourseName, COUNT(attendance.student_ID) AS student_count
+FROM course
+JOIN attendance ON course.Course_ID = attendance.course_ID
+GROUP BY course.CourseName
+ORDER BY student_count DESC
+LIMIT 3;
+
+
+
+
+
+
+
+Q26.
+ SELECT student.Name
+FROM student
+LEFT JOIN attendance ON student.Student_ID = attendance.student_ID
+GROUP BY student.Name
+HAVING COUNT(attendance.Attendance_Date) = (SELECT COUNT() FROM course);
+
+
